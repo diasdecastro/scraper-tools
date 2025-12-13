@@ -28,7 +28,7 @@ class GoogleMapsConfig:
     SELECTORS = {
         "card": 'a[aria-label][href^="https://www.google.com/maps/place/"]',
         "main": 'div[role="main"]',
-        "accept_cookies": 'button[aria-label^="Alle akzeptieren"]',
+        "accept_cookies": '*[aria-label^="Alle akzeptieren"]',
         "address_btn": 'button[data-item-id="address"]',
         "phone_btn": 'button[data-item-id^="phone:tel:"]',
         "website_link": 'a[data-item-id="authority"]',

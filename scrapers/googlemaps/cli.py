@@ -7,6 +7,7 @@ from scrapers.googlemaps.config import GoogleMapsConfig
 from scrapers.googlemaps.scraper import GoogleMapsScraper
 from utils.db import DatabaseManager
 from utils.store_data_json_helper import store_data_as_json
+import pandas as pd
 
 
 class GoogleMapsCLI(ScraperCLI):
@@ -38,11 +39,13 @@ class GoogleMapsCLI(ScraperCLI):
         storage_choice = questionary.select(
             "Where would you like to store the scraped data?",
             choices=[
-                questionary.Choice("Save to database", "database"),
+                questionary.Choice(
+                    "Save to database", "database", disabled="Not implemented yet"
+                ),
                 questionary.Choice("Save as JSON file", "json"),
-                questionary.Choice("Save to both database and JSON file", "both"),
+                questionary.Choice("Save as CSV file", "csv"),
             ],
-            default="both",
+            default="json",
         ).ask()
 
         if storage_choice is None:
@@ -52,6 +55,7 @@ class GoogleMapsCLI(ScraperCLI):
 
         return params
 
+    # TODO: Implement database storage option
     def run_scraper(self, params: Dict[str, Any]) -> bool:
         """Run the Google Maps scraper with the provided parameters."""
         try:
@@ -72,11 +76,14 @@ class GoogleMapsCLI(ScraperCLI):
 
             storage_type = params.get("storage_type", "both")
 
-            if storage_type in ("database", "both"):
-                db = DatabaseManager()
-                for result in results:
-                    db.store_data("googlemaps_companies", result)
-                print(f"✅ Stored {len(results)} entries in database")
+            if storage_type in ("csv"):
+                df = pd.DataFrame(results)
+                output_file = os.path.join(
+                    os.path.dirname(__file__), "data", "googlemaps_results.csv"
+                )
+                os.makedirs(os.path.dirname(output_file), exist_ok=True)
+                df.to_csv(output_file, index=False)
+                print(f"Data saved to CSV file at: {output_file}")
 
             if storage_type in ("json", "both"):
                 data_dir = os.path.join(os.path.dirname(__file__), "data")

@@ -35,6 +35,14 @@ class GoogleMapsScraper:
                 consent_btn = page.query_selector(
                     GoogleMapsConfig.SELECTORS["accept_cookies"]
                 )
+
+                # Take a screenshot for debugging
+                try:
+                    page.screenshot(path=f"debug_gmaps_consent.png")
+                    logger.info(f"Screenshot saved: debug_gmaps_consent.png")
+                except Exception as e:
+                    logger.warning(f"Could not take screenshot: {e}")
+
                 if consent_btn:
                     logger.info("Consent popup found. Clicking accept.")
                     consent_btn.click()

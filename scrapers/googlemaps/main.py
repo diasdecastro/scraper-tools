@@ -34,15 +34,14 @@ def cli_scrape(args):
             f"CLI Scrape: {args.query} in {args.location} (radius: {args.radius_meters}m)"
         )
 
-        scraper = GoogleMapsScraper(
-            requests_per_minute=args.requests_per_minute, proxy=args.proxy
-        )
+        scraper = GoogleMapsScraper(proxy=args.proxy)
 
         results = scraper.scrape(
             query=args.query,
             location=args.location,
             radius_meters=args.radius_meters,
             max_entries=args.max_entries,
+            requests_per_minute=args.requests_per_minute,
         )
 
         # Save results
