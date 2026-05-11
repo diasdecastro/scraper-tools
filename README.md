@@ -2,10 +2,6 @@
 
 A collection of web scrapers built with Playwright (mostly), featuring scraping tools with a unified CLI interface.
 
-## Overview
-
-This project provides a robust collection of web scrapers powered by Playwright, designed for various data extraction needs. Each scraper is built with stealth capabilities, rate limiting, and browser management features.
-
 ## Features
 
 - **CLI Interface**: Easy-to-use command-line interface for running scrapers
@@ -43,25 +39,6 @@ The project uses an interactive CLI architecture where each scraper defines its 
 # Interactive CLI menu
 python cli.py
 ```
-
-#### CLI Architecture
-
-- **Main CLI (`cli.py`)**: Interactive scraper selection with questionary prompts
-- **Scraper-specific CLIs**: Each scraper defines its own parameter collection interface
-- **Static Configuration**: All scrapers are explicitly defined in the main CLI
-- **Modular Design**: Easy to add new scrapers by updating the static list
-
-### Available Scrapers
-
-| Scraper | Description | Status | Documentation |
-|---------|-------------|--------|---------------|
-| Gelbeseiten | Scrapes business listings from Gelbeseiten.de | ✅ Active | [README](scrapers/gelbeseiten/README.md) |
-| Google Maps | Scrapes business listings from Google Maps | ✅ Active | [README](scrapers/googlemaps/README.md) |
-| Imprint Data | Extracts company data from German imprint pages | ⚠️ Outdated | [README](scrapers/imprint_data/README.md) |
-| Bundesanzeiger API | Enriches companies with financial data from Bundesanzeiger | ⚠️ Outdated | [README](scrapers/bundesanzeiger/README.md) |
-| [Add your scrapers here] | | | |
-
-> **Note**: All scrapers support rate limiting, proxy usage, and stealth features through the unified browser management system.
 
 ### Configuration
 
@@ -152,31 +129,3 @@ The project follows a modular architecture designed for scalability and maintain
     ├── logging.py         # Logging configuration
     └── store_data_json_helper.py  # Data persistence helpers
 ```
-
-**Key Design Principles**:
-- **Modular**: Each scraper is self-contained with its own configuration and CLI
-- **Unified Infrastructure**: Shared browser management, rate limiting, and utilities
-- **CLI-First**: Interactive questionary-based interfaces for ease of use
-- **Extensible**: Simple structure for adding new scrapers
-
-## Requirements
-
-- Python 3.8+
-- Playwright
-- playwright-stealth
-- Additional dependencies in requirements.txt
-
-
-## Disclaimer
-
-This tool is for educational and research purposes. Always respect robots.txt files and website terms of service. Use responsibly and in accordance with applicable laws and regulations.
-
-## Error Handling
-
-The scraper includes comprehensive error handling and logging:
-- Rate limiting errors
-- Network issues
-- Parsing failures
-- Invalid responses
-
-All errors are logged with appropriate context for debugging.
