@@ -1,15 +1,12 @@
 # Playwright Scrapers Collection
 
-A collection of web scrapers built with Playwright (mostly), featuring scraping tools with a unified CLI interface.
+A collection of web scrapers built with Playwright, featuring scraping tools with a unified CLI interface.
 
 ## Features
 
 - **CLI Interface**: Easy-to-use command-line interface for running scrapers
-- **Stealth Mode**: Built-in stealth capabilities to avoid detection
 - **Rate Limiting**: Configurable request rate limiting
-- **User Agent Rotation**: Automatic user agent rotation for better anonymity
-- **Proxy Support**: Optional proxy configuration
-- **Browser Management**: Intelligent browser context management and rotation
+- **Browser Management**: Intelligent browser context management
 
 ## Installation
 
@@ -53,17 +50,15 @@ Configure scraper behavior through environment variables or configuration files:
 
 ### Core Components
 
-- **BrowserManager**: Handles browser lifecycle, context rotation, and stealth features
-- **RateLimiter**: Controls request frequency to avoid being blocked
+- **BrowserManager**: Handles browser lifecycle
+- **RateLimiter**: Controls request frequency
 - **ScraperConfig**: Centralized configuration management
 - **CLI**: Command-line interface for easy scraper execution
 
 ### Browser Features
 
-- Automatic user agent rotation
-- Stealth mode to bypass basic bot detection
 - Context refresh at configurable intervals
-- Geolocation spoofing (Berlin, Germany)
+- Configurable locale and browser context settings
 - Custom headers and locale settings
 
 ## Development
@@ -85,7 +80,6 @@ scrapers/[scraper_name]/
 
 2. **Implement the core scraper** (`scraper.py`):
    - Create a scraper class that handles data extraction
-   - Use the BrowserManager for stealth and browser management
    - Implement proper error handling and logging
    - Return structured data (typically JSON)
 
@@ -113,7 +107,7 @@ The project follows a modular architecture designed for scalability and maintain
 ```
 ├── cli.py                  # Main entry point - interactive scraper selection
 ├── config/                 # Core infrastructure components
-│   ├── browser.py          # Browser management, stealth, and rotation
+│   ├── browser.py          # Browser management
 │   ├── config.py           # Global configuration and settings
 │   ├── rate_limiter.py     # Request rate limiting
 │   └── base_cli.py         # Base classes for CLI interfaces
